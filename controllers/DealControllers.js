@@ -51,14 +51,12 @@ exports.postDealData = async (req, res) => {
             }
         });
 
-        // Save the deal document to the database
         await newDeal.save();
 
-        // Respond with success message
-        return res.status(201).json({ message: "Deal data saved successfully" });
+        return res.status(201).json({status: true, code: 201 , message: "Deal data saved successfully", data:[newDeal] });
     } catch (error) {
         // If an error occurs, respond with an error message
         console.error("Error saving deal data:", error);
-        return res.status(500).json({ error: "Failed to save deal data" });
+        return res.status(500).json({status: false, code: 500, error: "Failed to save deal data", data:[] });
     }
 };
